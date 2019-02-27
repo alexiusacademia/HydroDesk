@@ -14,9 +14,7 @@ class Application : TkdApplication
         auto frame = new LabelFrame(parent, "Solver Nodes");
         frame.setWidth(200);
 
-        auto solverNodesTree = new TreeView(frame)
-            .setHeading("Solvers")
-            .setStretch(true)
+        auto solverNodesTree = new TreeView(frame).setHeading("Solvers").setStretch(true)
             .pack(0, 10, GeometrySide.left, GeometryFill.both, AnchorPosition.center);
 
         auto rowOpenChannel = new TreeViewRow(["Open Channel"], true, ["openchannel"]);
@@ -24,13 +22,23 @@ class Application : TkdApplication
         TreeViewRow[] childrenOpenChannel;
 
         childrenOpenChannel.length = childrenOpenChannel.length + 1;
-        childrenOpenChannel[0] = new TreeViewRow(["Rectangular Channel"], true, ["rectangularopenchannel"]);
-
-        
+        childrenOpenChannel[0] = new TreeViewRow(["Rectangular Channel"], true,
+                ["rectangularopenchannel"]);
 
         rowOpenChannel.children = childrenOpenChannel;
 
         auto rowDiversionWeirs = new TreeViewRow(["Diversion Weirs"], true, ["diversionweirs"]);
+
+        TreeViewRow[] childrenDiversionWeirs;
+
+        childrenDiversionWeirs.length = childrenDiversionWeirs.length + 1;
+        childrenDiversionWeirs[0] = new TreeViewRow(["Sharp-Crested Weir"], true, ["sharpcrested"]);
+        childrenDiversionWeirs.length = childrenDiversionWeirs.length + 1;
+        childrenDiversionWeirs[1] = new TreeViewRow(["Broad-Crested Weir"], true, ["broadcrested"]);
+        childrenDiversionWeirs.length = childrenDiversionWeirs.length + 1;
+        childrenDiversionWeirs[2] = new TreeViewRow(["Ogee Weir"], true, ["ogee"]);
+
+        rowDiversionWeirs.children = childrenDiversionWeirs;
 
         solverNodesTree.addRow(rowOpenChannel);
         solverNodesTree.addRow(rowDiversionWeirs);
@@ -53,14 +61,14 @@ class Application : TkdApplication
 
         auto leftPane = getLeftPane(mainPanedWindow);
 
-        auto centerPane = new Frame(mainPanedWindow)
-            .setWidth(700).setHeight(600);
+        auto centerPane = new Frame(mainPanedWindow).setWidth(700).setHeight(600);
 
         mainPanedWindow.addPane(leftPane);
         mainPanedWindow.addPane(centerPane);
         mainPanedWindow.setPaneWeight(0, 1);
         mainPanedWindow.setPaneWeight(1, 5);
 
-        mainPanedWindow.pack(0, 0, GeometrySide.top, GeometryFill.both, AnchorPosition.center, true);
+        mainPanedWindow.pack(0, 0, GeometrySide.top, GeometryFill.both,
+                AnchorPosition.center, true);
     }
 }
