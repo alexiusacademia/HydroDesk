@@ -4,9 +4,54 @@ import tkd.tkdapplication;
 
 class Application : TkdApplication
 {
-    private void exitCommand(CommandArgs args)
+    private void exitApplication(CommandArgs args)
     {
         this.exit();
+    }
+
+    private void newFile(CommandArgs args)
+    {
+
+    }
+
+    private void openFile(CommandArgs args)
+    {
+
+    }
+
+    private void newRectangularSection(CommandArgs args)
+    {
+
+    }
+
+    private void newTrapezoidalSection(CommandArgs args)
+    {
+
+    }
+
+    private void newIrregularSection(CommandArgs args)
+    {
+
+    }
+
+    private void newSharpCrestedWeir(CommandArgs args)
+    {
+
+    }
+
+    private void newBroadCrestedWeir(CommandArgs args)
+    {
+
+    }
+
+    private void newOgeeWeir(CommandArgs args)
+    {
+
+    }
+
+    private void showAbout(CommandArgs args)
+    {
+
     }
 
     // Left pane
@@ -46,6 +91,35 @@ class Application : TkdApplication
         return solverNodesTree;
     }
 
+    private void createMenu()
+    {
+        MenuBar menuBar = new MenuBar(this.mainWindow);
+
+        Menu fileMenu = new Menu(menuBar, "File", 0)
+            .addEntry("New", &this.newFile)
+            .addEntry("Open", &this.openFile)
+			.addSeparator()
+            .addEntry("Exit", &this.exitApplication);
+
+        Menu openChannelMenu = new Menu()
+            .addEntry("Rectangular Section", &this.newRectangularSection)
+            .addEntry("Trapezoidal Section", &this.newTrapezoidalSection)
+            .addEntry("Irregular Section", &this.newIrregularSection);
+
+        Menu diversionWeirsMenu = new Menu()
+            .addEntry("Sharp-Crested", &this.newSharpCrestedWeir)
+            .addEntry("Broad-Crested", &this.newBroadCrestedWeir)
+            .addEntry("Ogee", &this.newOgeeWeir);
+
+        auto spreadsheetMenu = new Menu(menuBar, "Spreadsheets", 0)
+            .addMenuEntry("Open Channel", openChannelMenu, 0)
+            .addMenuEntry("Diversion Weirs", diversionWeirsMenu, 0);
+        
+        Menu helpMenu = new Menu(menuBar, "Help", 0)
+            .addEntry("About", &this.showAbout);
+    
+    }
+
     override protected void initInterface()
     {
         this.mainWindow.setTitle = "HydroDesk";
@@ -56,6 +130,8 @@ class Application : TkdApplication
 
         // Set the size to maximized screen
         this.mainWindow.setGeometry(scWidth, scHeight, 0, 0);
+
+        this.createMenu();
 
         auto mainPanedWindow = new PanedWindow(this.mainWindow, Orientation.horizontal);
 
