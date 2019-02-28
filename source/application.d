@@ -9,12 +9,12 @@ class Application : TkdApplication
         this.exit();
     }
 
-    private LabelFrame getLeftPane(PanedWindow parent)
+    // Left pane
+    // Where the spreadsheets/solvers can be opened.
+    // Solvers will be in the for of a treeview
+    private TreeView getLeftPane(PanedWindow parent)
     {
-        auto frame = new LabelFrame(parent, "Solver Nodes");
-        frame.setWidth(200);
-
-        auto solverNodesTree = new TreeView(frame).setHeading("Solvers").setStretch(true)
+        auto solverNodesTree = new TreeView(parent).setHeading("Solvers").setStretch(true)
             .pack(0, 10, GeometrySide.left, GeometryFill.both, AnchorPosition.center);
 
         auto rowOpenChannel = new TreeViewRow(["Open Channel"], true, ["openchannel"]);
@@ -43,7 +43,7 @@ class Application : TkdApplication
         solverNodesTree.addRow(rowOpenChannel);
         solverNodesTree.addRow(rowDiversionWeirs);
 
-        return frame;
+        return solverNodesTree;
     }
 
     override protected void initInterface()
