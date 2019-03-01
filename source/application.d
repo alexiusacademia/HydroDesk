@@ -29,6 +29,11 @@ class Application : TkdApplication
 
     }
 
+    private void newCircularSection(CommandArgs args)
+    {
+        
+    }
+
     private void newIrregularSection(CommandArgs args)
     {
 
@@ -73,6 +78,12 @@ class Application : TkdApplication
         childrenOpenChannel.length = childrenOpenChannel.length + 1;
         childrenOpenChannel[0] = new TreeViewRow(["Rectangular Channel"], true,
                 ["rectangularopenchannel"]);
+        childrenOpenChannel.length = childrenOpenChannel.length + 1;
+        childrenOpenChannel[1] = new TreeViewRow(["Trapezoidal Channel"], true, ["trapezoidalopenchannel"]);
+        childrenOpenChannel.length = childrenOpenChannel.length + 1;
+        childrenOpenChannel[2] = new TreeViewRow(["Circular Channel"], true, ["circularopenchannel"]);
+        childrenOpenChannel.length = childrenOpenChannel.length + 1;
+        childrenOpenChannel[3] = new TreeViewRow(["Irregular Channel"], true, ["irregularopenchannel"]);
 
         rowOpenChannel.children = childrenOpenChannel;
 
@@ -108,6 +119,7 @@ class Application : TkdApplication
         Menu openChannelMenu = new Menu()
             .addEntry("Rectangular Section", &this.newRectangularSection)
             .addEntry("Trapezoidal Section", &this.newTrapezoidalSection)
+            .addEntry("Circular Section", &this.newCircularSection)
             .addEntry("Irregular Section", &this.newIrregularSection);
 
         Menu diversionWeirsMenu = new Menu()
