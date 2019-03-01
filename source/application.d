@@ -51,7 +51,11 @@ class Application : TkdApplication
 
     private void showAbout(CommandArgs args)
     {
-
+        MessageDialog aboutDialog = new MessageDialog(this.mainWindow, "About")
+            .setMessage("HydroDesk")
+            .setDetailMessage("Desktop solutions for hydraulics engineering and analysis.\n\n"
+                ~ "v0.0.1\n\nSyncsoft Solutions (c) 2019")
+            .show();
     }
 
     // Left pane
