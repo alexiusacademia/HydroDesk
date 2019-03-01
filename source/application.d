@@ -31,7 +31,7 @@ class Application : TkdApplication
 
     private void newCircularSection(CommandArgs args)
     {
-        
+
     }
 
     private void newIrregularSection(CommandArgs args)
@@ -59,8 +59,8 @@ class Application : TkdApplication
         MessageDialog aboutDialog = new MessageDialog(this.mainWindow, "About")
             .setMessage("HydroDesk")
             .setDetailMessage("Desktop solutions for hydraulics engineering and analysis.\n\n"
-                ~ "v0.0.1\n\nSyncsoft Solutions (c) 2019")
-            .show();
+                ~ "v0.0.1\n\nSyncsoft Solutions (c) 2019");
+        aboutDialog.show();
     }
 
     // Left pane
@@ -73,29 +73,22 @@ class Application : TkdApplication
 
         auto rowOpenChannel = new TreeViewRow(["Open Channel"], true, ["openchannel"]);
 
-        TreeViewRow[] childrenOpenChannel;
+        TreeViewRow[4] childrenOpenChannel;
 
-        childrenOpenChannel.length = childrenOpenChannel.length + 1;
         childrenOpenChannel[0] = new TreeViewRow(["Rectangular Channel"], true,
                 ["rectangularopenchannel"]);
-        childrenOpenChannel.length = childrenOpenChannel.length + 1;
         childrenOpenChannel[1] = new TreeViewRow(["Trapezoidal Channel"], true, ["trapezoidalopenchannel"]);
-        childrenOpenChannel.length = childrenOpenChannel.length + 1;
         childrenOpenChannel[2] = new TreeViewRow(["Circular Channel"], true, ["circularopenchannel"]);
-        childrenOpenChannel.length = childrenOpenChannel.length + 1;
         childrenOpenChannel[3] = new TreeViewRow(["Irregular Channel"], true, ["irregularopenchannel"]);
 
         rowOpenChannel.children = childrenOpenChannel;
 
         auto rowDiversionWeirs = new TreeViewRow(["Diversion Weirs"], true, ["diversionweirs"]);
 
-        TreeViewRow[] childrenDiversionWeirs;
+        TreeViewRow[3] childrenDiversionWeirs;
 
-        childrenDiversionWeirs.length = childrenDiversionWeirs.length + 1;
         childrenDiversionWeirs[0] = new TreeViewRow(["Sharp-Crested Weir"], true, ["sharpcrested"]);
-        childrenDiversionWeirs.length = childrenDiversionWeirs.length + 1;
         childrenDiversionWeirs[1] = new TreeViewRow(["Broad-Crested Weir"], true, ["broadcrested"]);
-        childrenDiversionWeirs.length = childrenDiversionWeirs.length + 1;
         childrenDiversionWeirs[2] = new TreeViewRow(["Ogee Weir"], true, ["ogee"]);
 
         rowDiversionWeirs.children = childrenDiversionWeirs;
