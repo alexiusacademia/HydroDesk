@@ -2,26 +2,33 @@ module application;
 
 import tkd.tkdapplication;
 
+import dialogs.newrectangularsection;
+
 class Application : TkdApplication
 {
+    TreeViewRow[4] childrenOpenChannel;
+    TreeViewRow[3] childrenDiversionWeirs;
+
+    int leftPaneWidth;
+
     private void exitApplication(CommandArgs args)
     {
         this.exit();
     }
 
-    private void newFile(CommandArgs args)
+    private void newProject(CommandArgs args)
     {
 
     }
 
-    private void openFile(CommandArgs args)
+    private void openProject(CommandArgs args)
     {
 
     }
 
     private void newRectangularSection(CommandArgs args)
     {
-
+        new RectangularChannelDialog(this.mainWindow, this.leftPaneWidth);
     }
 
     private void newTrapezoidalSection(CommandArgs args)
@@ -71,9 +78,10 @@ class Application : TkdApplication
         auto solverNodesTree = new TreeView(parent).setHeading("Solvers").setStretch(true)
             .pack(0, 10, GeometrySide.left, GeometryFill.both, AnchorPosition.center);
 
+        //---------------------
+        // Open channel nodes
+        //---------------------
         auto rowOpenChannel = new TreeViewRow(["Open Channel"], true, ["openchannel"]);
-
-        TreeViewRow[4] childrenOpenChannel;
 
         childrenOpenChannel[0] = new TreeViewRow(["Rectangular Channel"], true,
                 ["rectangularopenchannel"]);
@@ -83,9 +91,10 @@ class Application : TkdApplication
 
         rowOpenChannel.children = childrenOpenChannel;
 
+        //---------------------
+        // Diversion weirs nodes
+        //---------------------
         auto rowDiversionWeirs = new TreeViewRow(["Diversion Weirs"], true, ["diversionweirs"]);
-
-        TreeViewRow[3] childrenDiversionWeirs;
 
         childrenDiversionWeirs[0] = new TreeViewRow(["Sharp-Crested Weir"], true, ["sharpcrested"]);
         childrenDiversionWeirs[1] = new TreeViewRow(["Broad-Crested Weir"], true, ["broadcrested"]);
@@ -103,9 +112,9 @@ class Application : TkdApplication
     {
         MenuBar menuBar = new MenuBar(this.mainWindow);
 
-        Menu fileMenu = new Menu(menuBar, "File", 0)
-            .addEntry("New", &this.newFile)
-            .addEntry("Open", &this.openFile)
+        const Menu fileMenu = new Menu(menuBar, "File", 0)
+            .addEntry("New Project", &this.newProject)
+            .addEntry("Open Project", &this.openProject)
 			.addSeparator()
             .addEntry("Exit", &this.exitApplication);
 
@@ -120,11 +129,11 @@ class Application : TkdApplication
             .addEntry("Broad-Crested", &this.newBroadCrestedWeir)
             .addEntry("Ogee", &this.newOgeeWeir);
 
-        auto spreadsheetMenu = new Menu(menuBar, "Spreadsheets", 0)
+        const Menu spreadsheetMenu = new Menu(menuBar, "Spreadsheets", 0)
             .addMenuEntry("Open Channel", openChannelMenu, 0)
             .addMenuEntry("Diversion Weirs", diversionWeirsMenu, 0);
         
-        Menu helpMenu = new Menu(menuBar, "Help", 0)
+        const Menu helpMenu = new Menu(menuBar, "Help", 0)
             .addEntry("About", &this.showAbout);
     
     }
@@ -139,6 +148,7 @@ class Application : TkdApplication
 
         // Set the size to maximized screen
         this.mainWindow.setGeometry(scWidth, scHeight, 0, 0);
+        // this.mainWindow.setFullscreen(true);
 
         this.createMenu();
 
@@ -150,8 +160,10 @@ class Application : TkdApplication
 
         mainPanedWindow.addPane(leftPane);
         mainPanedWindow.addPane(centerPane);
-        mainPanedWindow.setPaneWeight(0, 1);
-        mainPanedWindow.setPaneWeight(1, 5);
+        // mainPanedWindow.setPaneWeight(0, 1);
+        // mainPanedWindow.setPaneWeight(1, 5);
+
+        this.leftPaneWidth = leftPane.getWidth;
 
         mainPanedWindow.pack(0, 0, GeometrySide.top, GeometryFill.both,
                 AnchorPosition.center, true);
